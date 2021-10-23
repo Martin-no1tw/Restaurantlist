@@ -1,9 +1,11 @@
-const e = require('express')
 /*****required package and framework*****/
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
 const restaurants = require('./restaurant.json')
+const routes = require('./routes')
+
+app.use(routes)
 
 const port = 3000
 
@@ -18,9 +20,6 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
 /***** setting routers *****/
-app.get('/', (req, res) => {
-  res.render('index', { restaurantList: restaurants.results })
-})
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
@@ -49,6 +48,8 @@ app.get('/:restaurant_id', (req, res) => {
   const show_result = restaurants.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
   res.render('show', { show_result })
 })
+
+
 
 /***** setting listener*****/
 app.listen(3000, () => {
