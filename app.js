@@ -7,9 +7,12 @@ const restaurants = require('./restaurant.json')
 
 const port = 3000
 
+
+require('./config/mongoose')
+
 /***** setting handlebars *****/
-app.engine('handlebars', exphbs({ defaultLayouts: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayouts: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 /***** setting static files *****/
 app.use(express.static('public'))
@@ -48,6 +51,6 @@ app.get('/:restaurant_id', (req, res) => {
 })
 
 /***** setting listener*****/
-app.listen(port, () => {
-  console.log('The server is listening...')
+app.listen(3000, () => {
+  console.log('App is running on http://localhost:3000')
 })
