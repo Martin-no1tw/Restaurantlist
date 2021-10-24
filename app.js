@@ -4,6 +4,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 const routes = require('./routes')
 const methodOverride = require('method-override')
+const port = 3000
 app.use(methodOverride('_method'))
 
 
@@ -16,39 +17,12 @@ app.set('view engine', 'hbs')
 /***** setting static files *****/
 app.use(express.static('public'))
 
+
+app.use(methodOverride('_method'))
 /***** setting routers *****/
-
-/*app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const keywordArray = keyword.trim().toLowerCase().split(' ')
-  const search_results = []
-  let showErrMsg = false
-  /***** if there are results *****/
-/* for (restaurant of restaurants.results) {
-   for (word of keywordArray) {
-     if (restaurant.name.toLowerCase().includes(word) && !search_results.includes(restaurant)) {
-       search_results.push(restaurant)
-     }
-     if (restaurant.category.toLowerCase().includes(word) && !search_results.includes(restaurant)) {
-       search_results.push(restaurant)
-     }
-   }
- }
- /***** if there no results *****/
-/*if (search_results.length === 0) {
-  showErrMsg = true
-}
-res.render('index', { restaurantList: search_results, keyword, showErrMsg })
-})
-
-app.get('/:restaurant_id', (req, res) => {
-const show_result = restaurants.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-res.render('show', { show_result })
-})*/
-
 app.use(routes)
 
 /***** setting listener*****/
-app.listen(3000, () => {
-  console.log('App is running on http://localhost:3000')
+app.listen(port, () => {
+  console.log(`App is running on http://localhost:${port}`)
 })

@@ -19,17 +19,17 @@
     <div class="col-12 col-lg-10 col-xl-8 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">新增餐廳</h5>
+          <h5 class="card-title">修改餐廳資訊</h5>
           <hr>
-          <form method="POST" action="/restaurants">
+          <form method="POST" action="/restaurants/{{restaurant._id}}?_method=PUT">
             <div class="form-group form-row">
               <label for="name-ch" class="col-md-4 col-form-label">
                 餐廳中文名稱
               </label>
               <div class="col-md-8">
-                <input class="form-control form-control-sm" type="text" name="name" id="name-ch" placeholder="好好吃喔"
-                  required>
-                <small class="text-muted form-text">請先輸入中文為主，若無中文可輸入英文</small>
+                <input class="form-control form-control-sm" type="text" name="name" id="name-ch"
+                  value="{{restaurant.name}}">
+                <small class="text-muted form-text">請輸入中文</small>
               </div>
             </div>
 
@@ -39,19 +39,19 @@
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="name_en" id="name-en"
-                  placeholder="YUM YUM" required>
+                  value="{{restaurant.name_en}}">
                 <small class="text-muted form-text">請輸入英文</small>
               </div>
             </div>
-            2
+
             <div class="form-group form-row">
               <label for="category-ch" class="col-md-4 col-form-label">
                 餐廳類別
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="category" id="category-ch"
-                  placeholder="台灣小吃" required>
-                <small class="text-muted form-text">請輸入中文，舉例如：台灣小吃</small>
+                  value="{{restaurant.category}}">
+                <small class="text-muted form-text">請輸入中文，舉例如：南洋料理</small>
               </div>
             </div>
 
@@ -61,7 +61,7 @@
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="image" id="image-en"
-                  placeholder="http://yumyum/bestpicture.jpeg" required>
+                  value="{{restaurant.image}}">
                 <small class="text-muted form-text">請輸入連結，格式如：http://yumyum/bestpicture.jpeg</small>
               </div>
             </div>
@@ -72,18 +72,18 @@
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="location" id="location-ch"
-                  placeholder="台北市台北區台北路無限段 888 巷 888 號" required>
+                  value="{{restaurant.location}}">
                 <small class="text-muted form-text">請輸入中文，範例如：台北市台北區台北路無限段 888 巷 888 號</small>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="google-map-en" class="col-md-4 col-form-label">
+              <label for="exclude-characters" class="col-md-4 col-form-label">
                 餐廳地址網址
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="google_map" id="google-map-en"
-                  placeholder="http://goggle/map" required>
+                  value="{{restaurant.google_map}}">
                 <small class="text-muted form-text">請輸入連結，格式如：http://goggle/map</small>
               </div>
             </div>
@@ -94,7 +94,7 @@
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="text" name="phone" id="phone-num"
-                  placeholder="02 1234 5678" required>
+                  value="{{restaurant.phone}}">
                 <small class="text-muted form-text">請輸入數字，格式如：02 1234 5678</small>
               </div>
             </div>
@@ -105,8 +105,8 @@
               </label>
               <div class="col-md-8">
                 <input class="form-control form-control-sm" type="number" name="rating" id="rating-num"
-                  placeholder="5.0" min="0.0" max="10.0" step="0.1" required>
-                <small class="text-muted form-text">請輸選數字，格式如：5.0</small>
+                  value="{{restaurant.rating}}">
+                <small class="text-muted form-text">請輸入數字，格式如：5.0</small>
               </div>
             </div>
 
@@ -116,15 +116,13 @@
               </label>
               <div class="col-md-8">
                 <textarea class="form-control form-control-sm" name="description" id="description-ch"
-                  placeholder="這裡的食物第一口就讓人有戀愛的感覺..." rows="3" required></textarea>
+                  rows="3">{{restaurant.description}}</textarea>
                 <small class="text-muted form-text">請輸入中文</small>
               </div>
             </div>
 
-            <button class="btn btn-success" type="submit">確認新增</button>
-          </form>
+            <button class="btn btn-success" type="submit">確認修改</button>
         </div>
       </div>
     </div>
   </div>
-</div>

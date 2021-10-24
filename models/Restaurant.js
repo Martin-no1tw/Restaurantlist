@@ -1,3 +1,4 @@
+// Load mongoose
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const RestaurantSchema = new Schema({
@@ -39,4 +40,5 @@ const RestaurantSchema = new Schema({
   }
 })
 
+// Export restaurants.js for other script(s) to import
 module.exports = mongoose.model('Restaurant', RestaurantSchema)
