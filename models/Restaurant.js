@@ -1,7 +1,6 @@
-// Load mongoose
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const RestaurantSchema = new Schema({
+const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -37,8 +36,13 @@ const RestaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
 })
 
-// Export restaurants.js for other script(s) to import
-module.exports = mongoose.model('Restaurant', RestaurantSchema)
+module.exports = mongoose.model('restaurant', restaurantSchema)

@@ -1,28 +1,44 @@
-/*****required package and framework*****/
 const express = require('express')
+const session = require('express-session')
 const app = express()
+const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
-const routes = require('./routes')
+const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const port = 3000
-app.use(methodOverride('_method'))
-
+const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+const routes = require('./routes')
+const usePassport = require('./config/passport')
 
 require('./config/mongoose')
 
-/***** setting handlebars *****/
-app.engine('hbs', exphbs({ defaultLayouts: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
-/***** setting static files *****/
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(express.static('public'))
-
-
 app.use(methodOverride('_method'))
-/***** setting routers *****/
+
+usePassport(app)
+app.use(flash())
+// 設定本地變數 res.locals 的 middleware
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  next()
+})
 app.use(routes)
 
-/***** setting listener*****/
-app.listen(port, () => {
-  console.log(`App is running on http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`express is listening on http://localhost:${PORT}`)
 })

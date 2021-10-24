@@ -78,11 +78,6 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.no-result-sign {
-  color: red;
-  padding-left: 3px;
-}
-
 @media screen and (max-width: 992px) {
   
   .card img{
@@ -104,3 +99,4 @@ header {
   }
   
 }
+
